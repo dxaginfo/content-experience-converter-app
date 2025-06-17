@@ -1,86 +1,249 @@
 # Content-to-Experience Converter Architecture
 
-## System Architecture Overview
+## System Overview
 
-The Content-to-Experience Converter uses a modular architecture to transform static content into interactive experiences, maintain cross-platform consistency, and optimize user engagement.
+The Content-to-Experience Converter is a modular web application built with Vue.js that transforms static content into interactive experiences while ensuring multi-platform consistency and optimizing user engagement.
 
 ```
-                     +---------------------------+
-                     |                           |
-                     |  User Interface (Vue.js)  |
-                     |                           |
-                     +---------------------------+
-                              |       |
-                +-------------+       +-------------+
-                |                                   |
-+---------------v-------------------+  +-----------v----------------+
-|                                   |  |                            |
-|  Content Transformation Engine    |  |  Analytics & Optimization  |
-|  - Text Analysis                  |  |  - Engagement Tracking     |
-|  - Media Integration              |  |  - A/B Testing Framework   |
-|  - Interactive Templates          |  |  - Recommendation Engine   |
-|                                   |  |                            |
-+-----------------------------------+  +----------------------------+
-                |                                   |
-                +----------------+  +---------------+
-                                 |  |
-                        +--------v--v-------+
-                        |                    |
-                        |  LocalStorage /    |
-                        |  IndexedDB         |
-                        |  (Client Storage)  |
-                        |                    |
-                        +--------------------+
++-----------------------------------+
+|                                   |
+|        User Interface Layer       |
+|                                   |
++-----------------------------------+
+                 |
+                 v
++-----------------------------------+
+|                                   |
+|      Core Application Layer       |
+|                                   |
++-----------------------------------+
+                 |
+                 v
++-----------------------------------+
+|                                   |
+|       Data Management Layer       |
+|                                   |
++-----------------------------------+
 ```
 
-## Component Descriptions
+## Architecture Components
 
-### 1. User Interface (Vue.js)
-- Interactive content editor with drag-and-drop functionality
-- Content upload and transformation tools
-- Multi-platform preview simulator (desktop, mobile, tablet)
-- Dashboard for analytics and performance metrics
+### 1. User Interface Layer
 
-### 2. Content Transformation Engine
-- **Text Analysis Module**: Processes and segments text content for interactive treatment
-- **Media Integration Module**: Handles embedding and enhancement of images, videos, and audio
-- **Interactive Templates System**: Pre-built interactive components for common content scenarios
+The user interface layer provides a responsive and intuitive interface for content creators to transform, preview, and optimize their content.
 
-### 3. Analytics & Optimization
-- **Engagement Tracking**: Monitors user interactions with the transformed content
-- **A/B Testing Framework**: Compares performance of different interactive treatments
-- **Recommendation Engine**: Provides AI-powered suggestions to improve engagement
+#### Key Components:
 
-### 4. Client Storage (LocalStorage/IndexedDB)
-- Persistent storage for user projects and content
-- Caching system for performance optimization
-- Export/import functionality for content sharing
+- **Editor Interface**: Interactive workspace for content transformation
+- **Preview Module**: Multi-platform preview with device simulation
+- **Dashboard**: Project management and analytics interface
+- **Settings Panel**: Configuration and preference management
 
-## Data Flow
+### 2. Core Application Layer
 
-1. **Content Input**: Users upload or paste static content (text, images, links)
-2. **Transformation Process**: Content is analyzed and segmented for interactive treatment
-3. **Template Application**: Interactive elements are applied based on content type and user selection
-4. **Preview & Editing**: Users can preview across platforms and make adjustments
-5. **Optimization**: System suggests improvements based on engagement patterns
-6. **Export & Deploy**: Transformed content is exported for use on various platforms
-7. **Performance Tracking**: Analytics track the effectiveness of the transformed content
+The core application layer contains the business logic and transformation engines that power the platform's functionality.
 
-## Technical Implementation
+#### Key Components:
 
-### Frontend Technologies
-- Vue.js for component-based UI development
-- Tailwind CSS for responsive design
-- Drag-and-drop libraries for the content editor
-- Chart.js for analytics visualization
+- **Content Analysis Engine**: Analyzes and segments input content
+- **Transformation Engine**: Converts static elements to interactive components
+- **Consistency Checker**: Validates content across multiple platforms
+- **Optimization Engine**: Analyzes and suggests engagement improvements
 
-### Key JavaScript Libraries
-- html-to-react/vue for content parsing
-- interact.js for interactive elements
-- chart.js for analytics visualization
-- localforage for enhanced client-side storage
+### 3. Data Management Layer
 
-### Future Expansion Points
-- Server-side component for user authentication and project storage
-- API connections to popular CMS platforms
-- Machine learning integration for advanced content optimization
+The data management layer handles persistence, retrieval, and organization of user projects and settings.
+
+#### Key Components:
+
+- **Project Store**: Manages saved projects and versions
+- **Template Library**: Provides reusable transformation templates
+- **User Preferences**: Stores user-specific configurations
+- **Analytics Store**: Collects and organizes engagement metrics
+
+## Component Interactions
+
+```
++----------------+     +----------------+     +----------------+
+|                |     |                |     |                |
+|  Content Input |---->| Transformation |---->| Multi-platform |
+|                |     |                |     |    Preview     |
++----------------+     +----------------+     +----------------+
+                              |
+                              v
++----------------+     +----------------+     +----------------+
+|                |     |                |     |                |
+|  Consistency   |<----| Optimization   |---->|   Analytics    |
+|    Checker     |     |    Engine      |     |  & Reporting   |
+|                |     |                |     |                |
++----------------+     +----------------+     +----------------+
+```
+
+## Technical Architecture
+
+### Frontend Architecture (Vue.js)
+
+```
++-----------------------------------------------------------+
+|                                                           |
+|                    Vue.js Application                      |
+|                                                           |
++---------+-------------+---------------+-------------------+
+|         |             |               |                   |
+| Views   | Components  | Composables   | Stores (Pinia)    |
+|         |             |               |                   |
++---------+-------------+---------------+-------------------+
+|                                                           |
+|                      Core Services                        |
+|                                                           |
++-----------------------------------------------------------+
+|                                                           |
+|                     External Libraries                    |
+|                                                           |
++-----------------------------------------------------------+
+```
+
+#### Key Technical Components:
+
+1. **Views**: Page-level components that represent major application features
+   - `EditorView.vue`: Main content editor interface
+   - `ConsistencyCheckerView.vue`: Platform consistency validation
+   - `OptimizationView.vue`: Engagement optimization interface
+   - `AnalyticsView.vue`: Performance metrics and insights
+
+2. **Components**: Reusable UI elements and functional units
+   - `TransformationToolbar.vue`: Interactive transformation controls
+   - `ContentElement.vue`: Individual content elements
+   - `PlatformPreview.vue`: Device-specific content preview
+   - `ConsistencyReport.vue`: Platform compatibility reporting
+
+3. **Composables**: Reusable logic hooks
+   - `useTransformation.js`: Content transformation logic
+   - `useConsistencyCheck.js`: Cross-platform validation
+   - `useAnalytics.js`: Engagement tracking and metrics
+   - `useStorage.js`: Project persistence and retrieval
+
+4. **Stores (Pinia)**: State management
+   - `projectStore.js`: Project data and metadata
+   - `settingsStore.js`: User preferences and configuration
+   - `analyticsStore.js`: Engagement metrics and optimization data
+
+5. **Services**: Core functionality modules
+   - `transformationService.js`: Content conversion logic
+   - `consistencyService.js`: Multi-platform validation
+   - `optimizationService.js`: Engagement improvement suggestions
+   - `storageService.js`: Data persistence
+
+### Data Flow
+
+1. **Content Input**: Users upload or enter static content
+2. **Content Analysis**: System analyzes content structure and elements
+3. **Transformation**: Static elements are converted to interactive components
+4. **Preview**: Interactive content is previewed across platform simulations
+5. **Consistency Check**: System validates cross-platform compatibility
+6. **Optimization**: System suggests improvements for engagement
+7. **Analytics**: Performance metrics are tracked after deployment
+
+## State Management
+
+The application uses Pinia for state management with the following stores:
+
+### Project Store
+
+```javascript
+// Structure overview
+{
+  projects: [
+    {
+      id: 'unique-id',
+      name: 'Project Name',
+      createdAt: timestamp,
+      updatedAt: timestamp,
+      content: {
+        // Original content
+        source: {},
+        // Transformed elements
+        transformedElements: []
+      },
+      settings: {
+        // Project-specific settings
+      },
+      metrics: {
+        // Engagement metrics
+      }
+    }
+  ],
+  currentProject: {}
+}
+```
+
+### Settings Store
+
+```javascript
+// Structure overview
+{
+  user: {
+    preferences: {
+      theme: 'light',
+      defaultPlatforms: ['desktop', 'mobile', 'tablet'],
+      editorSettings: {}
+    }
+  },
+  application: {
+    version: '0.1.0',
+    features: {}
+  }
+}
+```
+
+### Analytics Store
+
+```javascript
+// Structure overview
+{
+  metrics: {
+    projectId: {
+      engagementRate: 0.75,
+      averageTimeSpent: 120,
+      completionRate: 0.82,
+      platformBreakdown: {
+        desktop: { /* metrics */ },
+        mobile: { /* metrics */ },
+        tablet: { /* metrics */ }
+      }
+    }
+  },
+  optimizationSuggestions: []
+}
+```
+
+## Technical Dependencies
+
+1. **Core Framework**: Vue.js 3 with Composition API
+2. **State Management**: Pinia
+3. **Routing**: Vue Router
+4. **UI Framework**: Tailwind CSS
+5. **Charts and Visualization**: Chart.js
+6. **Interactive Elements**: interact.js
+7. **Content Parsing**: marked (for Markdown)
+8. **Storage**: localforage (client-side)
+9. **Build Tools**: Vite
+
+## Future Architecture Expansion
+
+The current architecture is designed for client-side operation with the following planned expansions:
+
+1. **Backend Services**:
+   - User authentication and authorization
+   - Server-side storage and synchronization
+   - Content analysis API
+
+2. **AI Integration**:
+   - Machine learning for content analysis
+   - Predictive engagement modeling
+   - Automated transformation suggestions
+
+3. **Integration APIs**:
+   - CMS connectors
+   - Analytics platform integration
+   - Social media publishing
