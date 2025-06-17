@@ -1,0 +1,33 @@
+{
+  "name": "content-experience-converter",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .js,.vue"
+  },
+  "dependencies": {
+    "chart.js": "^3.9.1",
+    "dompurify": "^2.4.0",
+    "highlight.js": "^11.6.0",
+    "html-to-vue": "^1.4.0",
+    "interact.js": "^1.10.17",
+    "localforage": "^1.10.0",
+    "marked": "^4.1.0",
+    "pinia": "^2.0.22",
+    "vue": "^3.2.40",
+    "vue-chartjs": "^4.1.2",
+    "vue-router": "^4.1.5"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.1.0",
+    "autoprefixer": "^10.4.12",
+    "eslint": "^8.24.0",
+    "eslint-plugin-vue": "^9.5.1",
+    "postcss": "^8.4.16",
+    "tailwindcss": "^3.1.8",
+    "vite": "^3.1.4"
+  }
+}
